@@ -1,0 +1,8 @@
+Data
+venv
+PreTrainingResults
+TrainingResults
+TestingResults
+Models
+MNIST
+CIFAR10
