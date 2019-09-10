@@ -12,7 +12,7 @@ class Encoder(nn.Module):
         ## Convolutional layer with 32 3*3 filters.
         if (dataset == 'MNIST' or dataset == 'USPS'):
             self.eConv1 = nn.Conv2d(in_channels = 1, out_channels = 32, kernel_size = 3, stride = 2, padding = 1)
-        if (dataset == 'CIFAR10' or dataset == 'FRGC'):
+        if (dataset == 'FRGC'):
             self.eConv1 = nn.Conv2d(in_channels = 3, out_channels = 32, kernel_size = 3, stride = 2, padding = 1)
         if (dataset == 'YTF'):
             self.eConv1 = nn.Conv2d(in_channels = 3, out_channels = 32, kernel_size = 5, stride = 2, padding = 1)
@@ -43,7 +43,7 @@ class Encoder(nn.Module):
         ## Fully Connected Layer.
         if (dataset == 'MNIST' or dataset == 'USPS' or dataset == 'YTF'):
             self.eFc = nn.Linear(in_features = 128 * 4 * 4, out_features = 32)
-        if (dataset == 'CIFAR10' or dataset == 'FRGC'):
+        if (dataset == 'FRGC'):
             self.eFc = nn.Linear(in_features = 128 * 5 * 5, out_features = 32)
 
     ## Forward Pass.
@@ -69,7 +69,7 @@ class Decoder(nn.Module):
         ## Fully Connected Layer.
         if (dataset == 'MNIST' or dataset == 'USPS' or dataset == 'YTF'):
             self.dFc = nn.Linear(in_features = 32, out_features = 128 * 4 * 4)
-        if (dataset == 'CIFAR10' or dataset == 'FRGC'):
+        if (dataset == 'FRGC'):
             self.dFc = nn.Linear(in_features = 32, out_features = 128 * 5 * 5)
 
         ## Apply Instance Normalization.
@@ -98,7 +98,7 @@ class Decoder(nn.Module):
         ## Convolutional layer with 1 4*4 filter.
         if (dataset == 'MNIST' or dataset == 'USPS'):
             self.dConv1 = nn.ConvTranspose2d(in_channels = 32, out_channels = 1, kernel_size = 4, stride = 2)
-        if (dataset == 'CIFAR10' or dataset == 'FRGC'):
+        if (dataset == 'FRGC'):
             self.dConv1 = nn.ConvTranspose2d(in_channels = 32, out_channels = 3, kernel_size = 4, stride = 2)
         if (dataset == 'YTF'):
             self.dConv1 = nn.ConvTranspose2d(in_channels = 32, out_channels = 3, kernel_size = 5, stride = 2)
@@ -111,7 +111,7 @@ class Decoder(nn.Module):
 
         if (self.dataset == 'MNIST' or self.dataset == 'USPS' or self.dataset == 'YTF'):
             z = F.dropout(torch.tanh(self.dBn3(z.view(z.size(0), 128, 4, 4))), p = 0.1, training = self.training)
-        if (self.dataset == 'CIFAR10' or self.dataset == 'FRGC'):
+        if (self.dataset == 'FRGC'):
             z = F.dropout(torch.tanh(self.dBn3(z.view(z.size(0), 128, 5, 5))), p = 0.1, training = self.training)
 
         z = F.dropout(F.leaky_relu(self.dBn2(self.dConv3(z))), p = 0.1, training = self.training)

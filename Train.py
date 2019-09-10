@@ -1,6 +1,4 @@
-import os
 import gc
-import time
 import copy
 import torch
 import argparse
@@ -94,7 +92,7 @@ if __name__ == '__main__':
 	Model = Model.cuda()
 
 	## Loading the pretrained model.
-	## Model.load_state_dict(torch.load('./NoPreTrainingResults/' + str(argList.dataSet) + '/AutoEncoder.pth'))
+	Model.load_state_dict(torch.load('./NoPreTrainingResults/' + str(argList.dataSet) + '/AutoEncoder.pth'))
 
 	## Defining the transformations to be applied.
 	Transforms = transforms.Compose([transforms.ToTensor()])
@@ -453,7 +451,7 @@ if __name__ == '__main__':
 	plt.title('Total Loss')
 	plt.savefig('./TrainingResults/' + str(argList.dataSet) + '/NoPreTraining/Percentage' + str(int(argList.percentLabData * 100)) +'/λAnnealResults/TotalLossλAnneal.png')
 
-	## Saving the pretrained model.
+	## Saving the trained model.
 	torch.save(Model, './TrainingResults/' + str(argList.dataSet) + '/NoPreTraining/Percentage'+ str(int(argList.percentLabData * 100)) + '/λAnnealResults/AutoEncoderλAnneal.pkl')
 	torch.save(Model.state_dict(), './TrainingResults/' + str(argList.dataSet) + '/NoPreTraining/Percentage'+ str(int(argList.percentLabData * 100)) + '/λAnnealResults/AutoEncoderλAnneal.pth')
 

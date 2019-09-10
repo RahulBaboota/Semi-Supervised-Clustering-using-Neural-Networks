@@ -1,45 +1,13 @@
-import os
 import torch
 import random
 import pickle
 import numpy as np
 from torch.utils.data import Dataset
+from torchvision.datasets import MNIST
 import torchvision.transforms as transforms
-from torchvision.datasets import MNIST, CIFAR10
 
 # Defining the transforms to be applied.
 Transforms = transforms.Compose([transforms.ToTensor()])
-
-## DataLoader for CIFAR DataSet.
-def loadCIFARBatch(filename):
-
-    ## Load single batch of CIFAR.
-    with open(filename, 'rb') as f:
-
-        ## Loading the Data Dictionary.
-        datadict = pickle.load(f, encoding = 'latin')
-
-        ## Extracting the images and labels.
-        X = datadict['data']
-        Y = datadict['labels']
-        X = X.reshape(10000, 3, 32, 32).transpose(0, 2, 3, 1).astype("float")
-        Y = np.array(Y)
-        return X, Y
-
-def loadCIFAR10(ROOT):
-
-    ## Load Entire CIFAR data.
-    xs = []
-    ys = []
-    for b in range(1,6):
-        f = os.path.join(ROOT, 'data_batch_%d' % (b, ))
-        X, Y = loadCIFARBatch(f)
-        xs.append(X)
-        ys.append(Y)    
-    Xtr = np.concatenate(xs)
-    Ytr = np.concatenate(ys)
-    del X, Y
-    return Xtr, Ytr
 
 ## DataLoader for the DataSet.
 def dataSplit(percentage = 1.0, dataset = 'MNIST'):
@@ -57,28 +25,6 @@ def dataSplit(percentage = 1.0, dataset = 'MNIST'):
         
         ## Setting the list of labels.
         classToConsider = list(range(10))
-
-    if (dataset == 'CIFAR10'):
-
-        ## Download CIFAR Dataset if not not present.
-        DataSet = CIFAR10('./CIFAR10', download = True, transform = Transforms)
-
-        ## Loading the CIFAR 10 data.
-        cifar10Dir = 'CIFAR10/cifar-10-batches-py'
-        trainImages, trainLabels = loadCIFAR10(cifar10Dir)
-        
-        ## Setting the list of labels.
-        classToConsider = list(range(10))
-
-    # if (dataset == 'CIFAR10'):
-
-    #     ## Loading the CIFAR data.
-    #     cifarData = pickle.load(open('./Data/cifarTrain.pickle', 'rb'))
-    #     trainImages = np.array(cifarData['data']).transpose(0, 3, 2, 1).astype(np.uint8)
-    #     trainLabels = np.array(cifarData['labels']).astype(np.uint8)
-        
-    #     ## Setting the list of labels.
-    #     classToConsider = list(range(10))
         
     if (dataset == 'USPS'):
         

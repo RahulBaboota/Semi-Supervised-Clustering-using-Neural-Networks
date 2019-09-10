@@ -15,7 +15,6 @@ from tensorboard_logger import configure, log_value
 from Models.ytfModel import *
 from Models.frgcModel import *
 from Models.uspsModel import *
-from Models.cifarModel import *
 from Models.mnistModel import *
 
 ## Initiating the parser.
@@ -54,12 +53,6 @@ if __name__ == '__main__':
 	## Defining the reconstruction loss function.
 	def mseLoss(input, target):
 		return torch.sum((input - target).pow(2)) / input.data.nelement()
-
-	## Instantiating the Model.
-	if (argList.dataSet == 'CIFAR10'):
-		Encoder = cifarEncoder()
-		Decoder = cifarDecoder()
-		Model = cifarAutoEncoder(Encoder, Decoder)
 
 	if (argList.dataSet == 'FRGC'):
 		Encoder = frgcEncoder()
