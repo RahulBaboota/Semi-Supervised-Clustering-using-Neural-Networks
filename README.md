@@ -23,4 +23,22 @@
     <li> The file <b> Visualisations.py </b> contains the code for producing the plots present in the report. </li>
     <li> The file <b> Train.py </b> contains the code for training the auto-encoder on the custom loss function. </li>
     <li> The file <b> Model.py </b> contains the architecture definition of the convolutional auto-encoder that is used.       </li>
+</ul>
 
+**4. Training the auto-encoder network**
+      
+      $ python Train.py --dataSet <dataSet Name> --percentLabData <Percentage of labelled data to be used>
+      
+The training procedure will train the convolutional auto-encoder on the specified dataset. The folder <b> /TrainingResults </b> will get populated with the trained model as well as various other information required for generating the plots.
+  
+**5. Testing the auto-encoder network**
+
+      $ python Test.py --dataSet <dataSet Name> --percentLabData <Percentage of labelled data to be used>
+
+The testing script will run the trained model on the test data and will populate the folder <b> /TestingResults </b>.
+
+**5. Producing the plots**
+
+      $ python Visualisations.py --dataSet <dataSet Name> --percentLabData <Percentage of labelled data to be used>
+
+This script will produce the different plots for the dataset and percentage of labelled data specified in the input.
