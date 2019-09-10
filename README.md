@@ -42,3 +42,17 @@ The testing script will run the trained model on the test data and will populate
       $ python Visualisations.py --dataSet <dataSet Name> --percentLabData <Percentage of labelled data to be used>
 
 This script will produce the different plots for the dataset and percentage of labelled data specified in the input.
+
+**6. Example Plots**
+
+The plots generated for 10% labelled data for MNIST are displayed below.
+
+<img src="https://github.com/RahulBaboota/Semi-Supervised-Clustering-using-Neural-Networks/blob/master/Images/AnnealingLoss.png">
+<img src="https://github.com/RahulBaboota/Semi-Supervised-Clustering-using-Neural-Networks/blob/master/Images/DifferentLoss1.png">
+<img src="https://github.com/RahulBaboota/Semi-Supervised-Clustering-using-Neural-Networks/blob/master/Images/DifferentLoss2.png">
+<img src="https://github.com/RahulBaboota/Semi-Supervised-Clustering-using-Neural-Networks/blob/master/Images/NMIPurity.png">
+<img src="https://github.com/RahulBaboota/Semi-Supervised-Clustering-using-Neural-Networks/blob/master/Images/NMIPurityAnnealing.png">
+<img src="https://github.com/RahulBaboota/Semi-Supervised-Clustering-using-Neural-Networks/blob/master/Images/totalLoss.png">
+
+
+
